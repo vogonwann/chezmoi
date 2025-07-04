@@ -1,0 +1,133 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["custom/niriworkspaces"],
+    "modules-center": ["custom/music"],
+    "modules-right": ["cpu", "memory", "pulseaudio", "clock", "custom/keyboard-layout", "custom/weather", "tray", "custom/lock", "custom/power"],
+    "sway/workspaces": {
+         "disable-scroll": true,
+        "disable-markup" : false,
+        "all-outputs": true,
+        "format": "  {icon}  ",
+        //"format":"{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+        }
+     },
+     "custom/niriworkspaces": {
+        "exec": "~/.config/niri/workspac-indicator.sh \"$WAYBAR_OUTPUT_NAME\"", 
+	"signal": 8,
+	"max-length": 90,
+	"interval": 1,
+  "format": "{}",
+  "on-click": "niri msg action workspace-switch --idx $((WAYBAR_BUTTON-1))"
+     },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+    "custom/weather": {
+        "exec": "~/.config/waybar/scripts/weather.sh Smederevo", 
+        "return-type": "json",
+        "interval": 600,
+    },
+    "custom/music": {
+        "format": "  {}",
+        "escape": true,
+        "interval": 5,
+        "tooltip": false,
+        "exec": "playerctl metadata --format='{{ title }}'",
+        "on-click": "playerctl play-pause",
+        "max-length": 50
+    },
+    "clock": {
+        "timezone": "Europe/Belgrade",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": " {:%d/%m/%Y}",
+        "format": " {:%H:%M}"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-charging": "",
+        "format-plugged": "",
+        "format-alt": "{icon}",
+        "format-icons": ["", "",  "", "", "", "", "", "", "", "", "", ""]
+    },
+    "pulseaudio": {
+        "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}  {format_source}",
+        "format-bluetooth-muted": " {icon}  {format_source}",
+        "format-muted": "婢 {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "וֹ",
+            "headset": "  ",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [""]
+        },
+        "on-click": "pavucontrol",
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%",
+    },
+    "custom/lock": {
+        "tooltip": false,
+        "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown",
+        "format": "",
+    },
+    "custom/power": {
+        "format":"⏻",
+        "on-click": "exec ~/.config/waybar/scripts/power-menu.sh",
+        "tooltip": false,
+    },
+    "custom/keyboard-layout": {
+        "exec": "/home/wann/.config/niri/keyboard-indicator.sh", 
+       // "exec": "niri msg keyboard-layouts | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4 | sed 's/\\n//g'",
+        //"exec": "niri msg keyboard-layouts | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
+	// "exec": "niri msg keyboard-layouts | grep -m1 'xkb_active_layout_name'",
+        // Interval set only as a fallback, as the value is updated by signal
+        "interval": 1,
+        "format": "  {}", // Icon: keyboard
+        // Signal sent by Sway key binding (~/.config/sway/key-bindings) -- not working!! TODO
+        "signal": 1, // SIGHUP
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/keyhint.sh",
+    },
+     "cpu": {
+        "interval": 5,
+        "format": "  {usage}% ({load})", // Icon: microchip
+        "states": {
+            "warning": 70,
+            "critical": 90,
+        },
+        "on-click": "xfce4-terminal -e 'htop'",
+    },
+    "memory": {
+        "interval": 5,
+        "format": " {}%", // Icon: memory
+        "on-click": "xfce4-terminal -e 'htop'", 
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+}
