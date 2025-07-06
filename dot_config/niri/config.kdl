@@ -269,6 +269,8 @@ spawn-at-startup "waybar"
 spawn-at-startup "waypaper" "--restore"
 spawn-at-startup "udiskie" "-t"
 spawn-at-startup "/home/wann/.config/niri/swayidle.sh"
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "lxpolkit" 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
@@ -281,6 +283,9 @@ spawn-at-startup "/home/wann/.config/niri/swayidle.sh"
 // The path is formatted with strftime(3) to give you the screenshot date and time.
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
+environment {
+    DISPLAY ":0"
+}
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
 
@@ -388,7 +393,7 @@ window-rule {
     // It is useful for setting defaults for all windows.
     // You can also use it to override the default column width.
     match app-id="org.mozilla.firefox"
-    match app-id="org.mozilla.thunderbird"
+    match app-id="org.mozilla.Thunderbird"
     opacity 0.95
     // Uncomment this line to disable client-side decorations for all windows.
     // prefer-no-csd
@@ -644,8 +649,8 @@ binds {
     // Mod+Shift+Space { switch-layout "prev"; }
 
     Ctrl+Shift+S { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Ctrl+Alt+S { screenshot-screen; }
+    Ctrl+Mod+S { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here

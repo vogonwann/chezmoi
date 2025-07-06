@@ -5,7 +5,7 @@ indicator-caps-lock
 # datestr=%A
 image=$HOME/.config/sway/swaylock.png
 scaling=fill
-font=UbuntuMono
+font=JetBrainsMono Nerd Font
 font-size=20
 
 # Ring

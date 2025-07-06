@@ -13,10 +13,9 @@
 }
 
 #workspaces {
-  border-radius: 1rem;
-  margin: 5px;
+  border-radius: 1rem 0 0 1rem;
+  margin: 5px 0 5px 5px;
   background-color: @surface0;
-  margin-left: 1rem;
 }
 
 #workspaces button {
@@ -62,6 +61,14 @@
   background-color: @surface0;
   border-radius: 1rem;
   margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#window {
+  background-color: @surface0;
+  border-radius: 0 1rem 1rem 0;
   padding: 0.5rem 1rem;
   margin-top: 5px;
   margin-bottom: 5px;
