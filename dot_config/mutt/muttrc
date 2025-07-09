@@ -3,7 +3,7 @@ set my_name="Ivan Janjić"
 set from="ivan@janjic.lol"
 
 set imap_user=ivan@janjic.lol
-set imap_pass=te9c9b3mngswnt4b
+set imap_pass=MY_PASSWORD
 
 set folder=imaps://ivan@janjic.lol@imap.fastmail.com/
 set spoolfile=+INBOX
